@@ -37,9 +37,7 @@ Persistent, scoped memory across sessions—without building any backend infrast
 ```
 /
 ├── examples/         # Demo integrations (Node, Python, Web)
-├── sdk/              # SDK wrappers
 ├── docs/             # Usage guides & API reference
-├── tests/            # Automated tests
 └── README.md         # ← You are here
 ```
 
@@ -47,58 +45,36 @@ Persistent, scoped memory across sessions—without building any backend infrast
 
 ## ⚡ Quickstart
 
-### 1. Install SDK
+## Installation
 
 ```bash
 npm install recallio
-# or
-pip install recallio
 ```
 
-### 2. Initialize Client
+## Usage
 
-```js
-import { RecallIO } from "recallio";
+```ts
+import { RecallioClient } from 'recallio';
 
-const client = new RecallIO({
-  apiKey: process.env.RECALLIO_API_KEY,
-  userId: "user‑123",
+const client = new RecallioClient({ apiKey: 'YOUR_API_KEY' });
+
+// Write a memory
+await client.writeMemory({
+  userId: 'user_123',
+  projectId: 'project_abc',
+  content: 'The user prefers dark mode',
+  consentFlag: true,
 });
 
-await client.addMemory({ key: "greeting", value: "Hi there!" });
-```
-
-### 3. Retain & Retrieve Memory
-
-```js
-const items = await client.getMemory({ userId: "user‑123" });
-console.log(items);
-```
-
-### 4. Context-Aware Chat Example
-
-```js
-const memories = await client.searchMemory({
-  query: userInput,
-  userId: "user‑123",
-  limit: 5,
+// Recall memories
+const result = await client.recallMemory({
+  userId: 'user_123',
+  projectId: 'project_abc',
+  query: 'dark mode',
+  scope: 'user',
 });
 
-const prompt = `
-You are a chatbot. Here are past memories:
-${memories.map(m => "- " + m.value).join("
-")}
-
-Now answer:
-${userInput}
-`;
-
-// send to LLM, get response...
-
-await client.addMemory({
-  key: "lastChat",
-  value: `${userInput} → ${assistantReply}`,
-});
+console.log(result);
 ```
 
 ---
@@ -107,43 +83,6 @@ await client.addMemory({
 
 - **Node.js**, **Python**, **Browser** – See `/examples` for integration across environments.  
 - **AI Agents & SaaS** – Built for conversational tools, customer support, personal assistants.
-
----
-
-## 📘 Documentation
-
-- [API Reference & SDK](https://app.recallio.ai/api-docs) ([github.com](https://github.com/embedchain/embedchain/activity?ref=main&utm_source=chatgpt.com), [app.recallio.ai](https://app.recallio.ai/api-docs?utm_source=chatgpt.com), [mem0.ai](https://mem0.ai/blog/introducing-openmemory-mcp/?utm_source=chatgpt.com), [github.com](https://github.com/embedchain/embedchain/discussions/categories/general?utm_source=chatgpt.com), [app.recallio.ai](https://app.recallio.ai/?utm_source=chatgpt.com), [arxiv.org](https://arxiv.org/abs/2504.19413?utm_source=chatgpt.com))  
-- [Website & Blog](https://www.recallio.ai)
-
----
-
-## 🧪 Tests & CI
-
-- Unit & integration tests located in `/tests`
-- CI pipelines ensure release stability
-
----
-
-## 🛠️ Contributing
-
-1. Fork the repository  
-2. Create a feature branch  
-3. Write tests  
-4. Submit a PR  
-
-All contributions are welcome—bug fixes, new SDKs, fresh integrations!
-
----
-
-## 📄 License
-
-MIT License – see the [LICENSE](LICENSE) file.
-
----
-
-## 🎉 Acknowledgements
-
-Inspired by [Mem0](https://github.com/mem0ai/mem0), which uses intelligent, LLM‑augmented memory for AI agents ([github.com](https://github.com/mem0ai/mem0?utm_source=chatgpt.com), [github.com](https://github.com/mem0ai/mem0-chrome-extension?utm_source=chatgpt.com)).
 
 ---
 
