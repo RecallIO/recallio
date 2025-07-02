@@ -2,7 +2,7 @@
 # 🧠 RecallIO
 
 **RecallIO.ai** – a plug‑and‑play memory API for AI apps, agents, and SaaS tools.  
-Persistent, scoped memory across sessions—without building any backend infrastructure ([recallio.ai](https://www.recallio.ai/?utm_source=chatgpt.com)).
+Persistent, scoped memory across sessions—without building any backend infrastructure ([recallio.ai](https://www.recallio.ai/?utm_source=github.com)).
 
 ---
 
@@ -12,7 +12,7 @@ Persistent, scoped memory across sessions—without building any backend infrast
   Save, retrieve, and update memory items tied to users or sessions.
 
 - **LLM-Agnostic**  
-  Works seamlessly with OpenAI, Claude, GPT‑4V, and more ([github.com](https://github.com/embedchain/embedchain/activity?ref=main&utm_source=chatgpt.com), [app.recallio.ai](https://app.recallio.ai/?utm_source=chatgpt.com)).
+  Works seamlessly with OpenAI, Claude, GPT‑4V, and more ([github.com](https://github.com/embedchain/embedchain/activity?ref=main&utm_source=chatgpt.com), [app.recallio.ai](https://app.recallio.ai/?utm_source=github.com)).
 
 - **Plug‑and‑Play API**  
   Easy REST + SDK integration—no infra, no fuss.
@@ -36,14 +36,13 @@ Persistent, scoped memory across sessions—without building any backend infrast
 
 ```
 /
-├── examples/         # Demo integrations (Node, Python, Web)
-├── docs/             # Usage guides & API reference
+├── examples/         # Demo integrations (Node, Python)
 └── README.md         # ← You are here
 ```
 
 ---
 
-## ⚡ Quickstart
+## ⚡ Quickstart Node.js
 
 ## Installation
 
@@ -60,28 +59,80 @@ const client = new RecallioClient({ apiKey: 'YOUR_API_KEY' });
 
 // Write a memory
 await client.writeMemory({
-  userId: 'user_123',
-  projectId: 'project_abc',
-  content: 'The user prefers dark mode',
-  consentFlag: true,
-});
+      userId,
+      projectId,
+      content: text,
+      tags: ['telegram'],
+      consentFlag: true
+    });
 
 // Recall memories
 const result = await client.recallMemory({
-  userId: 'user_123',
-  projectId: 'project_abc',
-  query: 'dark mode',
-  scope: 'user',
-});
+        userId,
+        projectId,
+        query,
+        scope: 'user',
+        limit: 10,
+        similarityThreshold: 0.2,
+        tags: ['telegram'],
+        summarized: true
+      });
+const response = result.length > 0 && result[0].content || 'No memory found.';
 
 console.log(result);
 ```
 
 ---
 
+---
+
+## ⚡ Quickstart Python
+
+## Installation
+
+```bash
+pip install recallio
+```
+
+## Usage
+
+```py
+from recallio import RecallioClient, MemoryWriteRequest, MemoryRecallRequest, RecallioAPIError
+
+self.recall_client = RecallioClient(api_key='YOUR_API_KEY')
+
+
+// Write a memory
+self.recall_client.write_memory(
+              MemoryWriteRequest(
+			  userId=self.user_id, 
+			  projectId=self.project_id, 
+			  content=user_text, 
+			  consentFlag=True)
+            )
+			
+
+// Recall memories
+recall_req = MemoryRecallRequest(
+                projectId=self.project_id,
+                userId=self.user_id,
+                query=user_text,
+                scope='user',
+                summarized=True,
+                similarityThreshold=0.2,
+                limit=10,
+            )
+memories = self.recall_client.recall_memory(recall_req)
+if memories:
+	first = memories[0]
+	summary_text = getattr(first, 'content', '') or getattr(first, 'summary', '')
+```
+
+---
+
 ## 📚 Examples
 
-- **Node.js**, **Python**, **Browser** – See `/examples` for integration across environments.  
+- **Node.js**, **Python** – See `/examples` for integration across environments.  
 - **AI Agents & SaaS** – Built for conversational tools, customer support, personal assistants.
 
 ---
