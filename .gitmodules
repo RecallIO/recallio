@@ -4,3 +4,6 @@
 [submodule "examples/telegram-bot"]
 	path = examples/telegram-bot
 	url = https://github.com/RecallIO/telegram-bot.git
+[submodule "examples/chatwithmemory-py"]
+	path = examples/chatwithmemory-py
+	url = https://github.com/RecallIO/chatwithmemory-py
