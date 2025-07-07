@@ -1,34 +1,46 @@
-
 # 🧠 RecallIO
 
-**RecallIO.ai** – a plug‑and‑play memory API for AI apps, agents, and SaaS tools.  
-Persistent, scoped memory across sessions—without building any backend infrastructure ([recallio.ai](https://www.recallio.ai/?utm_source=github.com)).
+**RecallIO.ai** – Plug‑and‑play memory for next-gen AI apps, agents, and SaaS products.
+Persistent, intelligent memory across sessions—zero backend infrastructure required.
 
 ---
 
-## 🚀 Features
+## 🚀 Key Features
 
-- **Scoped & Persistent Memory**  
-  Save, retrieve, and update memory items tied to users or sessions.
+* **Persistent & Scoped Memory**
+  Seamlessly save, retrieve, and update memories linked to specific users or sessions.
 
-- **LLM-Agnostic**  
-  Works seamlessly with OpenAI, Claude, GPT‑4V, and more ([github.com](https://github.com/embedchain/embedchain/activity?ref=main&utm_source=chatgpt.com), [app.recallio.ai](https://app.recallio.ai/?utm_source=github.com)).
+* **Fact Extraction**
+  Automatically distill key facts from memories, storing them efficiently for rapid retrieval.
 
-- **Plug‑and‑Play API**  
-  Easy REST + SDK integration—no infra, no fuss.
+* **Instant Summaries**
+  Generate and access insightful summaries within milliseconds.
 
-- **Secure & Compliant**  
-  Supports best practices for data privacy and access control.
+* **Intelligent Prioritization**
+  Surface the most relevant information precisely when it's needed.
+
+* **Memory Graph Intelligence**
+  Dynamically identify entities and relationships for advanced, intuitive access.
+
+* **Plug-and-Play Integration**
+  Effortless REST and SDK integration—focus on your product, not infrastructure.
+
+* **Secure & Compliance-Ready**
+  Designed with industry-leading data privacy and security best practices built-in.
 
 ---
 
 ## 💡 Why RecallIO?
 
-| Problem | RecallIO Solution |
-|--------|-------------------|
-| Context resets across sessions | Memory persists and is searchable |
-| Reinvention of memory infra | Ready-to-use API layer |
-| Token overload | Efficient retrieval with scoped context |
+| Common Challenges                | RecallIO Advantage                 |
+| -------------------------------- | ---------------------------------- |
+| Session context resets           | Persistent, searchable memory      |
+| Rebuilding memory infrastructure | Out-of-the-box memory API          |
+| Excessive token usage            | Efficient, scoped memory retrieval |
+
+---
+
+*Unlock smarter AI experiences with RecallIO.*
 
 ---
 
