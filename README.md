@@ -59,30 +59,83 @@ const client = new RecallioClient({ apiKey: 'YOUR_API_KEY' });
 
 // Write a memory
 await client.writeMemory({
-      userId,
-      projectId,
-      content: text,
-      tags: ['telegram'],
-      consentFlag: true
-    });
+  userId: 'user_123',
+  projectId: 'project_abc',
+  content: 'The user prefers dark mode',
+  consentFlag: true,
+});
 
 // Recall memories
 const result = await client.recallMemory({
-        userId,
-        projectId,
-        query,
-        scope: 'user',
-        limit: 10,
-        similarityThreshold: 0.2,
-        tags: ['telegram'],
-        summarized: true
-      });
-const response = result.length > 0 && result[0].content || 'No memory found.';
+  userId: 'user_123',
+  projectId: 'project_abc',
+  query: 'dark mode',
+  scope: 'user',
+  reRank: true,
+});
 
 console.log(result);
+
+// Summarize memories
+const summary = await client.recallSummary({
+  userId: 'user_123',
+  projectId: 'project_abc',
+  scope: 'user',
+});
+
+console.log(summary.content);
 ```
 
 ---
+
+### Working with the knowledge graph
+
+```ts
+// Add data to the graph
+await client.addGraphMemory({
+  data: 'Alice knows Bob',
+  user_id: 'user_123',
+});
+
+// Search the graph
+const relationships = await client.searchGraphMemory({
+  query: 'Alice',
+  limit: 5,
+});
+
+// Export memories as JSON
+const data = await client.exportMemory({
+  type: 'fact',
+  format: 'json',
+  userId: 'user_123',
+});
+
+console.log(data);
+```
+
+### Error handling
+
+API calls throw a `RecallioError` when the service returns an error response. The
+error includes the HTTP status code and the payload returned by the API.
+
+```ts
+import { RecallioClient, RecallioError } from 'recallio';
+
+try {
+  await client.writeMemory({
+    userId: 'user_123',
+    projectId: 'project_abc',
+    content: 'The user prefers dark mode',
+    consentFlag: true,
+  });
+} catch (err) {
+  if (err instanceof RecallioError) {
+    console.error('API error', err.status, err.details);
+  } else {
+    console.error('Unexpected error', err);
+  }
+}
+```
 
 ---
 
