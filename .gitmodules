@@ -7,3 +7,6 @@
 [submodule "examples/chatwithmemory-py"]
 	path = examples/chatwithmemory-py
 	url = https://github.com/RecallIO/chatwithmemory-py
+[submodule "examples/chatwithgraphmemory-ts"]
+	path = examples/chatwithgraphmemory-ts
+	url = https://github.com/RecallIO/chatwithgraphmemory-ts.git
